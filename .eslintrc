@@ -14,9 +14,11 @@
 
   "rules": {
     "indent": [ "error", 2 ],
-
     "semi": [ 2, "always" ],
-
-    "consistent-return": 2
+    "consistent-return": 2,
+    "arrow-parens": [ 2, "as-needed" ],
+    "no-console": "error",
+    "space-before-blocks": "error",
+    "space-before-function-paren": ["error", "never"]
   }
 }
