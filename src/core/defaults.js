@@ -5,7 +5,7 @@ const DEFAULT_CONTENT_TYPE = {
 };
 
 const defaults = {
-  requestOptios: {
+  requestOptions: {
     // An options object containing any custom settings that you want to apply to the request
     method: 'get',
 

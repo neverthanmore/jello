@@ -1,5 +1,7 @@
 'use strict';
-
+/**
+ * Cancel instance to throw
+ */
 class Cancel {
   constructor(message) {
     this.__CANCEL__ = true;
