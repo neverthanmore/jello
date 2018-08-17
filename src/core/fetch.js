@@ -41,7 +41,6 @@ export default function adapter(config) {
 
     // fetch resolve function
     function fetchResolve(response) {
-      let bodyData;
       let responseType = ['arrayBuffer', 'formData', 'json', 'text']
         .includes(config.responseType) || 'json';
 
@@ -84,7 +83,7 @@ export default function adapter(config) {
       }
     }
 
-    const fetchPromise = fetch(buildURL(url, config.params, config.paramsSerializer), requestOptions)
+    let fetchPromise = fetch(buildURL(url, config.params, config.paramsSerializer), requestOptions)
       .then(fetchResolve, fetchReject);
 
     // handle timeout

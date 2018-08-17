@@ -48,7 +48,7 @@ class Jello {
       chain.push(interceptor.fulfilled, interceptor.rejected);
     });
 
-    const promise = Promise.resolve(config);
+    let promise = Promise.resolve(config);
 
     while(chain.length) {
       promise = promise.then(chain.shift(), chain.shift());
