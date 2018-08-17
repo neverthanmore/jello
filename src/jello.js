@@ -5,10 +5,10 @@ import interceptor from './core/interceptor';
 import merge from './helpers/merge';
 import dispatchRequest from './core/dispatchRequest';
 import cancelToken from './cancel/cancelToken';
+import isCancel from './cancel/isCancel';
 
 const NO_DATA_METHOD = ['delete', 'get', 'head', 'options'];
 const WITH_DATA_METHOD = ['put', 'patch', 'post'];
-const IS_CANCEL = symbol('Jello#isCancel');
 class Jello {
   constructor(defaultConifg) {
     this.defaults = defaultConifg;
@@ -26,11 +26,7 @@ class Jello {
   }
 
   get isCancel() {
-    return this[IS_CANCEL];
-  }
-
-  [IS_CANCEL](value) {
-    return !!(value && value.__CANCEL__);
+    return isCancel;
   }
 
   request(config) {

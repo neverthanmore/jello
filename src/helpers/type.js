@@ -87,8 +87,34 @@ function isURLSearchParams(val) {
   return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
+/**
+ * Determine if a value is Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if the value is Object, otherwise false
+ */
 function isObject(val) {
   return typeof val === 'object';
+}
+
+/**
+ * Determine if a value is Array
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if the value is Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is Date
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if the value is Date, otherwise false
+ */
+function isDate() {
+  return toString.call(val) === '[object Date]';
 }
 
 export {
@@ -100,7 +126,9 @@ export {
   isBlob,
   isArrayBufferView,
   isURLSearchParams,
-  isObject
+  isObject,
+  isArray,
+  isDate
 };
 
 export default {
@@ -112,5 +140,7 @@ export default {
   isBlob,
   isArrayBufferView,
   isURLSearchParams,
-  isObject
+  isObject,
+  isArray,
+  isDate
 };

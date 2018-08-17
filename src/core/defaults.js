@@ -50,11 +50,7 @@ const defaults = {
    * add xsrf token to headers
    */
   xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  validateStatus: status => {
-    return status >= 200 && status < 300;
-  }
+  xsrfHeaderName: 'X-XSRF-TOKEN'
 };
 
 defaults.headers = {

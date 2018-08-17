@@ -3,7 +3,6 @@
 import isAbsoluteURL from '../helpers/isAbsoluteURL';
 import combineURLs from '../helpers/combineURLs';
 import transformRequest from '../helpers/transformRequest';
-import transformResponse from '../helpers/transformResponse';
 import merge from '../helpers/merge';
 import adapter from './fetch';
 
@@ -40,8 +39,10 @@ export default function dispatchRequest(config) {
   });
 
   return adapter(config).then(response => {
-
+    throwIfCancelRequest(config);
+    return response;
   }, reason => {
-
+    throwIfCancelRequest(config);
+    return Promise.reject(reason);
   });
 }
