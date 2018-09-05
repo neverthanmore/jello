@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Multi Object deep clone
+ * Multi Object deep assign
  *
  * @param {Array} objs Object Array to merge
  * @return {Object} result of merge
