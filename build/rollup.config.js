@@ -12,10 +12,14 @@ export default {
     name: 'jello'
   },
   plugins: [
-    babel({
-      exclude: 'node_modules/**' // 只编译我们的源代码
+    resolve({
+      browser: true
     }),
-    resolve(),
+    babel({
+      exclude: 'node_modules/**', // 只编译我们的源代码
+      externalHelpers: true,
+      runtimeHelpers: true
+    }),
     commonjs()
   ]
 };

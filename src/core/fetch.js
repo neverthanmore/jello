@@ -35,14 +35,14 @@ export default function adapter(config) {
     }
 
     // add method、headers to requestOptions
-    object.assign(requestOptions, {
+    Object.assign(requestOptions, {
       method, headers
     });
 
     // fetch resolve function
     function fetchResolve(response) {
-      let responseType = ['arrayBuffer', 'formData', 'json', 'text']
-        .includes(config.responseType) || 'json';
+      let responseType = ~['arrayBuffer', 'formData', 'json', 'text']
+        .indexOf(config.responseType) ? config.responseType : 'json';
 
       // ie send 1223 insteadof 204
       let resolveResponse = {

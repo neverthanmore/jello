@@ -1,10 +1,15 @@
 {
-  "presets": [
-    ["latest", {
-      "es2015": {
-        "modules": false
+  "presets": ["@babel/env"],
+  "plugins": [
+    "@babel/external-helpers",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": 2,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
       }
-    }]
-  ],
-  "plugins": ["external-helpers"]
+    ]
+  ]
 }
