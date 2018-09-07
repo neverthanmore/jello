@@ -55,7 +55,7 @@ export default function adapter(config) {
         statusText: response.status === 1223 ? 'No Content' : response.statusText,
         type: response.type,
         url: response.url,
-        request: fetchPromise,
+        // request: fetchPromise,
       };
       // if (!response.bodyUsed) {
       response.clone()[responseType]().then(data => {
