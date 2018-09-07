@@ -7,7 +7,7 @@ import isURLSameOrigin from '../helpers/isURLSameOrigin';
 import createError from './createError';
 
 export default function adapter(config) {
-  return new Promise(resolve, reject => {
+  return new Promise((resolve, reject) => {
     const { headers, data, method, url, requestOptions } = config;
 
     if (isFormData(data)) { // let browser set it
@@ -26,8 +26,10 @@ export default function adapter(config) {
     requestOptions.signal = abortController.signal;
 
     // get xsrf from cookies and add xsrf to header
-    const xsrfValue = (requestOptions.credentials === 'include' && isURLSameOrigin(url)) && config.xsrfCookieName ?
-      cookies.read(onfig.xsrfCookieName) :
+    const xsrfValue = (requestOptions.credentials === 'include' ||
+      (isURLSameOrigin(url) && requestOptions.credentials === 'same-origin'))
+      && config.xsrfCookieName ?
+      cookies.read(config.xsrfCookieName) :
       undefined;
 
     if (xsrfValue) {
@@ -46,12 +48,12 @@ export default function adapter(config) {
 
       // ie send 1223 insteadof 204
       let resolveResponse = {
-        headers: response.url,
-        ok: response.url,
-        redirected: response.url,
+        headers: response.headers,
+        ok: response.ok,
+        redirected: response.redirected,
         status: response.status === 1223 ? 204 : response.status,
         statusText: response.status === 1223 ? 'No Content' : response.statusText,
-        type: response.url,
+        type: response.type,
         url: response.url,
         request: fetchPromise,
       };

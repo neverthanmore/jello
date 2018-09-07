@@ -59,7 +59,7 @@ defaults.headers = {
   }
 };
 
-[ 'delete', 'get', 'header' ].forEach(method => {
+[ 'delete', 'get', 'head' ].forEach(method => {
   defaults.headers[method] = {};
 });
 

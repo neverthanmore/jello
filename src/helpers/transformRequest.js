@@ -1,5 +1,6 @@
 'use strict';
 import normalizeHeaderName from './normalizeHeaderName';
+import setContentTypeIfUnset from './setContentTypeIfUnset';
 import {
   isFormData, isArrayBuffer, isFile,
   isBlob, isArrayBufferView, isURLSearchParams,

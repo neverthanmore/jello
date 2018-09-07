@@ -1358,7 +1358,7 @@
       Accept: 'application/json, text/plain, */*'
     }
   };
-  ['delete', 'get', 'header'].forEach(function (method) {
+  ['delete', 'get', 'head'].forEach(function (method) {
     defaults.headers[method] = {};
   });
   ['post', 'put', 'patch'].forEach(function (method) {
@@ -2036,6 +2036,12 @@
     return toString$2.call(val) === '[object Date]';
   }
 
+  function setContentTypeIfUnset(headers, value) {
+    if (!isUndefined(headers) && !isUndefined(headers['Content-Type'])) {
+      headers['Content-Type'] = value;
+    }
+  }
+
   var REQUEST_OPTIONS = ['cache', 'credentials', 'destination', 'integrity', 'keepalive', 'mode', 'redirect', 'referrer', 'referrerPolicy', 'signal'];
   /**
    * deal data by type
@@ -2194,7 +2200,7 @@
   }
 
   function adapter(config) {
-    return new promise$1(resolve, function (reject) {
+    return new promise$1(function (resolve, reject) {
       var headers = config.headers,
           data = config.data,
           method = config.method,
@@ -2217,7 +2223,7 @@
       var abortController = new AbortController();
       requestOptions.signal = abortController.signal; // get xsrf from cookies and add xsrf to header
 
-      var xsrfValue = requestOptions.credentials === 'include' && isURLSameOrigin(url) && config.xsrfCookieName ? cookies.read(onfig.xsrfCookieName) : undefined;
+      var xsrfValue = (requestOptions.credentials === 'include' || isURLSameOrigin(url) && requestOptions.credentials === 'same-origin') && config.xsrfCookieName ? cookies.read(config.xsrfCookieName) : undefined;
 
       if (xsrfValue) {
         headers[config.xsrfHeaderName] = xsrfValue;
@@ -2234,12 +2240,12 @@
         var responseType = ~['arrayBuffer', 'formData', 'json', 'text'].indexOf(config.responseType) ? config.responseType : 'json'; // ie send 1223 insteadof 204
 
         var resolveResponse = {
-          headers: response.url,
-          ok: response.url,
-          redirected: response.url,
+          headers: response.headers,
+          ok: response.ok,
+          redirected: response.redirected,
           status: response.status === 1223 ? 204 : response.status,
           statusText: response.status === 1223 ? 'No Content' : response.statusText,
-          type: response.url,
+          type: response.type,
           url: response.url,
           request: fetchPromise
         }; // if (!response.bodyUsed) {
